@@ -24,7 +24,7 @@
          data_in/2,
          msg_in/2]).
 
--define(CLOSE_AFTER, 5000).
+-define(CLOSE_AFTER, 10000).
 
 -record(state, {
           peer         :: peer(),

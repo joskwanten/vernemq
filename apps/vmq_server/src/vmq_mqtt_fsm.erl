@@ -23,7 +23,7 @@
          msg_in/2,
          info/2]).
 
--define(CLOSE_AFTER, 5000).
+-define(CLOSE_AFTER, 10000).
 
 -define(IS_PROTO_4(X), X =:= 4; X =:= 132).
 -define(IS_PROTO_3(X), X =:= 3; X =:= 131).
