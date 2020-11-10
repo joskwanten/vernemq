@@ -1,11 +1,64 @@
 # Changelog
 
+- Fix bug causing the `pool_size` option for databases to not be respected.
+
+## VerneMQ 1.11.0
+
+- Improve Proxy protocol error logging (warn instead of crash process).
+- Add retain command to vmq-admin usage output
+- Bridge Plugin: Continue to publish during netsplit (that is, during cluster not_ready)
+- Bridge Plugin: Make internal publish use the configured per-topic QoS
+- Upgrade package `bcrypt` to fix compilation in OSX (#1500).
+- Fix issue with loading status dashboard from behind a proxy with a basepath set
+- Fix bug where the server would not parse multiple WebSocket protocols correctly.
+- New feature: Allow configuration of allowed ECC named curves in configuration file. (thanks to @varnerac)
+- New feature: Add `on_topic_unsubscribe` hook (PR #1539, Issue #1326). (thanks to @khodzha)
+- Update to jquery 3.5.1 and bootstrap 4.1.2 in status page.
+- Add case clause for proxy protocol 'local command', causing unnecessary error logging in loadbalancer health checks.
+
+## VerneMQ 1.10.4.1
+
+Patch Release to:
+- Fix the new bridge metrics labels that prevented the Prometheus metrics to be exported correctly (blocking Prometheus export entirely).
+
+## VerneMQ 1.10.4
+
+- Improve buffering in in-memory queue of outgoing bridges.
+- Add a Name to bridges, so that a bridge can be identified by {Name, Host, Port}, instead of {Host, Port} only. This allows multiple bridges to the same remote endpoint.
+- Add bridge Name and MQTT client mailbox size to `vmq-admin bridge show` command.
+- Add per QoS/per bridge in and out counters to pull resp. push bridges.
+- Log bridge connection setups and subscribes (info level).
+- Support Power Linux LE (ppc64le) platform.
+- Add `on_session_expired/1` hook to `vmq_webhooks` schema.
+- Add Subscriber trie/event handler readiness check to handle fast subscribers after a reboot (race condition, #1557).
+- Update nodetool escript with latest version.
+- Fix internal Watermark update in SWC (#1556).
+- Handle LevelDB truncated record corruption more automatically in LevelDB SWC and Messagestore backends.
+- Catch ETS table call in `vmq_cluster:netsplit_statistics/0` (#1537).
+- Add compatibility with [Erlang/OTP 23](http://blog.erlang.org/OTP-23-Highlights/). This release requires Erlang/OTP 21.3 or later.
+- Upgrade package `bcrypt` to version 1.1.0.
+- Upgrade package `hackney` to version 1.16.0 (dependencies of `hackney` were updated as well).
+- Fix to allow equal signs on parameter values on `vmq-admin` commands (#740).
+
+ URL parameters on webhooks
+
+## VerneMQ 1.10.3
+
 - Add new `on_session_expired/1` hook to `vmq_diversity` and `vmq_webhooks`.
 - Add datetime prefix to the tracer output. The datetimes are expressed in UTC with
  [iso-8601](https://www.w3.org/TR/NOTE-datetime) format (eg '2020-04-29T21:19:39Z'). (#782)
-- Add Observer CLI tool for realtime info.
 - Add start command to Bridge CLI.
 - Fix options passed to PublishFun for plugins (#1516)
+- Add configurable connect time (mqtt_connect_timeout) between establishing the connection and sending CONNECT (#735, #824).
+- Fix tracing error when using payload modifiers (#1517).
+- Make `vmq-admin bridge show` command more robust against bridge client state machine timeouts (#1515).
+- Fix vmq health http format error (#1529).
+- Add new CLI output formatter (#1502).
+- Remove minor functions for OTP 18. OTP 18 is not supported anymore (#1523).
+- Update VerneMQ Schema info on SWC.
+- Add Inet6 support to the vmq_diversity MySQL plugin (#1461).
+- Improve error message when plugin chains have exhausted (#1465).
+- Upgrade clique dependency to fix bug with empty KV params.
 
 ## VerneMQ 1.10.2
 

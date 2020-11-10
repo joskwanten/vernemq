@@ -90,6 +90,8 @@ vmq_listener_start_cmd() ->
                                        end}]},
                  {ciphers, [{longname, "ciphers"},
                             {typecast, fun(C) -> C end}]},
+                 {eccs, [{longname, "eccs"},
+                            {typecast, fun(C) -> C end}]},
                  {crlfile, [{longname, "crlfile"},
                             {typecast, fun(FileName) ->
                                                case filelib:is_file(FileName) of
@@ -101,8 +103,7 @@ vmq_listener_start_cmd() ->
                                        end}]},
                  {require_certificate, [{longname, "require_certificate"}]},
                  {tls_version, [{longname, "tls_version"},
-                                {typecast, fun("sslv3") -> sslv3;
-                                              ("tlsv1") -> tlsv1;
+                                {typecast, fun("tlsv1") -> tlsv1;
                                               ("tlsv1.1") -> 'tlsv1.1';
                                               ("tlsv1.2") -> 'tlsv1.2';
                                               (V) ->
@@ -327,6 +328,8 @@ vmq_listener_start_usage() ->
      "      The path to the PEM encoded key file\n",
      "  --ciphers=CiphersList\n",
      "      The list of allowed ciphers, each separated by a colon\n",
+     "  --eccs=EllipticCurveList\n",
+     "      The list of allowed elliptic curves, each separated by a colon\n",
      "  --crlfile=CRLFile\n",
      "      If --require-certificate is set, you can use a certificate\n",
      "      revocation list file to revoke access to particular client\n",
